@@ -13,5 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - _.gitignore_ file to exclude files and folders from being committed, e.g. folder .idea.
 - MIT _LICENSE.md_ file.
 - _README.md_ with short project description, usage instructions with requirements and installation, contributing section and licence link.
-- Added _onlinesetup_ file that can be used to install project via a network, this file accepts three useful arguments: repository from which to install dockerizer (helps to debug or install own modification), branch (again, helps to debug or install own modification) and install directory in case your project uses same name as default install folder.
-- Added _Makefile_, _.make/tools.mk_ for helper constants, _.make/tools/colors.mk_ for CLI colors, _.make/project.mk_ with help target that prints the help message.
+- _onlinesetup_ file that can be used to install project via a network, this file accepts three useful arguments: repository from which to install dockerizer (helps to debug or install own modification), branch (again, helps to debug or install own modification) and install directory in case your project uses same name as default install folder.
+- _Makefile_ file that includes other mk helper files from _.make_ directory.
+- _.make/tools.mk_ files for bash constants, _.make/tools/colors.mk_ file for bash colors
+- _.make/project.mk_ with targets for project managing: help, start, stop, restart etc.

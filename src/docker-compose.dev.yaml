@@ -1,0 +1,28 @@
+version: '3.7'
+
+networks:
+  project-network:
+    driver: bridge
+
+services:
+  nginx:
+    env_file:
+      - ./.env.dev
+      - ./.env.dev.local
+
+  php:
+    ports:
+      - "2222:22"   # ssh connection with container
+      - "9003:9003" # xdebug default port
+    env_file:
+      - ./.env.dev
+      - ./.env.dev.local
+    environment:
+      - XDEBUG_ENABLED=1
+      - XDEBUG_CONFIG=PHPSTORM
+      - PHP_IDE_CONFIG=serverName=nginx
+
+  db:
+    env_file:
+      - ./.env.dev
+      - ./.env.dev.local

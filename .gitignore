@@ -1,1 +1,7 @@
 /.idea
+/src/.env*
+/src/.dc-running
+/src/composer.json
+/src/composer.lock
+/src/src/
+/src/vendor/

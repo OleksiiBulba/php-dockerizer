@@ -1,0 +1,26 @@
+version: '3.7'
+
+networks:
+  project-network:
+    driver: bridge
+
+services:
+  nginx:
+    ports:
+      - "443:443"
+    volumes:
+      - ./.docker/nginx/ssl/nginx-selfsigned.key:/etc/nginx/ssl/nginx-selfsigned.key
+      - ./.docker/nginx/ssl/nginx-selfsigned.crt:/etc/nginx/ssl/nginx-selfsigned.crt
+    env_file:
+      - ./.env.prod
+      - ./.env.prod.local
+
+  php:
+    env_file:
+      - ./.env.prod
+      - ./.env.prod.local
+
+  db:
+    env_file:
+      - ./.env.prod
+      - ./.env.prod.local
