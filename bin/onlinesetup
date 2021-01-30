@@ -12,5 +12,8 @@ git fetch origin -qqq
 git checkout $VERSION -- src
 # TODO: add bin folder so it will be possible to use shell scripts during installation
 
+PREV_DOTGLOB=$(shopt -p | grep dotglob)
+shopt -s dotglob
 mv ./src/* ../
+$PREV_DOTGLOB
 cd ../; rm -rf ./$INSTALL_DIR
