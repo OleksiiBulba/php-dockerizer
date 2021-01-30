@@ -1,0 +1,16 @@
+#!/bin/bash
+
+REPO=${1:-https://github.com/OleksiiBulba/php-dockerizer}
+VERSION=${2:-origin/master}
+INSTALL_DIR=${3:-dockerizer}
+
+mkdir $INSTALL_DIR; cd ./$INSTALL_DIR
+
+git init -qqq
+git remote add origin $REPO
+git fetch origin -qqq
+git checkout $VERSION -- src
+# TODO: add bin folder so it will be possible to use shell scripts during installation
+
+mv ./src/* ../
+cd ../; rm -rf ./$INSTALL_DIR
