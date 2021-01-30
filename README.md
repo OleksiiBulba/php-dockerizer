@@ -5,7 +5,21 @@ others similar is simplicity: you run single bash command and get power of make 
 files for different purposes. After installing php-dockerizer into your project you can commit only files you want
 to keep.
 
-## Installation
+## Usage
+
+Usage of the dockerizer is pretty simple: you run online install command, it fetches changes from install repository to your project and you can commit files you want to keep.
+Keep in mind that dockerizer will copy the list of the files and directories to the root of your project:
+```text
+Makefile
+.make
+```
+* In future dockerizer will be able to detect if there is any file conflicts with your existing files, or 
+
+### Requirements
+
+To use dockerizer you need to install [make](https://www.gnu.org/software/make/) and [docker-compose](https://docs.docker.com/compose/install/).
+
+### Installation
 
 To install php-dockerizer simply run command:
 ```shell
