@@ -11,10 +11,9 @@ help::
 	@printf "$(GREEN)   	stop		$(NC)	Stops all containers\n"
 	@printf "$(GREEN)   	restart		$(NC)	Stops and runs again all containers\n"
 	@printf "$(GREEN)   	logs		$(NC)	Show containers logs\n"
-	@printf "$(GREEN)   	bash		$(NC)	Show containers logs\n\n\n"
-	@printf "$(GREEN)   	NGINX_SERVER_CONFIG_FILE:	$(NGINX_SERVER_CONFIG_FILE)\n"
+	@printf "$(GREEN)   	bash		$(NC)	Show containers logs\n"
 
-.env.local .env.${ENV} .env.${ENV}.local:
+.env .env.local .env.${ENV} .env.${ENV}.local:
 	cp .env.dist $@
 
 .PHONY: init
