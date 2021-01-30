@@ -1,7 +1,10 @@
 /.idea
 /src/.env*
+!/src/.env.dist
 /src/.dc-running
 /src/composer.json
 /src/composer.lock
 /src/src/
 /src/vendor/
+/tests/install/*
+!/tests/install/.gitkeep

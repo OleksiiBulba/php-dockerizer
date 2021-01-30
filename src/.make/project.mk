@@ -14,13 +14,19 @@ help::
 	@printf "$(GREEN)   	bash		$(NC)	Show containers logs\n\n\n"
 	@printf "$(GREEN)   	NGINX_SERVER_CONFIG_FILE:	$(NGINX_SERVER_CONFIG_FILE)\n"
 
+.env.local .env.${ENV} .env.${ENV}.local:
+	cp .env.dist $@
+
+.PHONY: init
+init: .env .env.local .env.${ENV} .env.${ENV}.local
+
 .PHONY: run
-run: .env .env.local src composer.json composer.lock vendor .docker docker-compose.base.yaml docker-compose.${ENV}.yaml
+run: init src composer.json composer.lock vendor .docker docker-compose.base.yaml docker-compose.${ENV}.yaml
 	$(DOCKER_COMPOSE) up -d
 	@touch .dc-running
 
 .PHONY: ps
-ps:
+ps: init
 	$(DOCKER_COMPOSE) ps -a
 
 .PHONY: stop

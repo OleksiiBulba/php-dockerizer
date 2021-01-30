@@ -16,4 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - _onlinesetup_ file that can be used to install project via a network, this file accepts three useful arguments: repository from which to install dockerizer (helps to debug or install own modification), branch (again, helps to debug or install own modification) and install directory in case your project uses same name as default install folder.
 - _Makefile_ file that includes other mk helper files from _.make_ directory.
 - _.make/tools.mk_ files for bash constants, _.make/tools/colors.mk_ file for bash colors
-- _.make/project.mk_ with targets for project managing: help, start, stop, restart etc.
+- _.make/project.mk_ with targets for project managing:
+  - **help** prints list of all available commands;
+  - **run**, **stop**, **restart** - containers management;
+  - **init** copies .env.dist file;
+  - **ps**  shows running containers;
+  - **logs** shows container logs;
+  - **bash** enters to php container with bash;
+- _.env.dist_ file as an example for _.env_ file
