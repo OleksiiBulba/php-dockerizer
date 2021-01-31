@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Planned
 - Add bin directory to checkout during installation, so it will be possible to use shell scripts.
 
+## [0.1.0] - 2021-01-31
+
 ### Added
 - This _CHANGELOG.md_ file to keep track of all changes in the project.
 - _.gitignore_ file to exclude files and folders from being committed, e.g. folder .idea.
