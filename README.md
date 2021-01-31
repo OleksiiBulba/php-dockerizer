@@ -23,7 +23,7 @@ To use dockerizer you need to install [make](https://www.gnu.org/software/make/)
 
 To install php-dockerizer simply run command:
 ```shell
-curl -s https://raw.githubusercontent.com/OleksiiBulba/php-dockerizer/master/bin/onelinesetup | bash -s -- https://github.com/OleksiiBulba/php-dockerizer origin/master dockerizer
+curl -s https://raw.githubusercontent.com/OleksiiBulba/php-dockerizer/master/bin/onlinesetup | bash -s -- https://github.com/OleksiiBulba/php-dockerizer origin/master dockerizer
 ```
 
 If you cloned repository to your github account, you can install php-dockerizer by a command:
