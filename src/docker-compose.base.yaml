@@ -11,7 +11,7 @@ volumes:
 services:
   nginx:
     image: nginx:latest
-    container_name: ${PROJECT_NAME:-project_}_nginx
+    container_name: ${PROJECT_NAME:-project}_nginx
     ports:
       - "80:80"
     volumes:
@@ -27,7 +27,7 @@ services:
 
   php:
     image: php:8.0.0-fpm
-    container_name: ${PROJECT_NAME:-project_}_php
+    container_name: ${PROJECT_NAME:-project}_php
     ports:
       - "9000:9000"
       - "2222:22" # ssh connection with container
@@ -51,7 +51,7 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: ${PROJECT_NAME:-project_}_db
+    container_name: ${PROJECT_NAME:-project}_db
     ports:
       - 3300:3306
     env_file:
