@@ -11,6 +11,7 @@ Usage of the dockerizer is pretty simple: you run online install command, it fet
 Keep in mind that dockerizer will copy the list of the files and directories to the root of your project:
 ```text
 Makefile
+.docker
 .make
 ```
 * In future dockerizer will be able to detect if there is any file conflicts with your existing files, or 
