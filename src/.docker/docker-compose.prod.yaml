@@ -12,8 +12,8 @@ services:
       - ./.docker/nginx/ssl/nginx-selfsigned.key:/etc/nginx/ssl/nginx-selfsigned.key
       - ./.docker/nginx/ssl/nginx-selfsigned.crt:/etc/nginx/ssl/nginx-selfsigned.crt
     env_file:
-      - ./.env.prod
-      - ./.env.prod.local
+      - ../.env.prod
+      - ../.env.prod.local
 
   php:
     env_file:
@@ -22,5 +22,5 @@ services:
 
   db:
     env_file:
-      - ./.env.prod
-      - ./.env.prod.local
+      - ../.env.prod
+      - ../.env.prod.local

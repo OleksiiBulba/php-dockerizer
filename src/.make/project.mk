@@ -20,7 +20,7 @@ help::
 init: .env .env.local .env.${APP_ENV} .env.${APP_ENV}.local
 
 .PHONY: run
-run: init src composer.json composer.lock vendor .docker docker-compose.base.yaml docker-compose.${APP_ENV}.yaml
+run: init src composer.json composer.lock vendor .docker/docker-compose.base.yaml .docker/docker-compose.${APP_ENV}.yaml
 	$(DOCKER_COMPOSE) up -d
 	@touch .dc-running
 
