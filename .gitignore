@@ -4,6 +4,8 @@
 /src/.dc-running
 /src/composer.json
 /src/composer.lock
+/src/index.php
+/src/public/
 /src/src/
 /src/vendor/
 /tests/install/*

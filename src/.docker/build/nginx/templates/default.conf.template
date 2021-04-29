@@ -1,0 +1,60 @@
+upstream fastcgi_backend {
+    server php:9000;
+}
+
+server {
+    listen        ${NGINX_PORT};
+    server_name   ${NGINX_HOST};
+    root          ${SITE_ROOT};
+
+    location / {
+        # try to serve file directly, fallback to index.php
+        try_files $uri /index.php$is_args$args;
+    }
+
+    location /public {
+        alias ${SITE_ROOT};
+        add_header X-Frame-Options "SAMEORIGIN";
+    }
+
+    # optionally disable falling back to PHP script for the asset directories;
+    # nginx will return a 404 error when files are not found instead of passing the
+    # request to Symfony (improves performance but Symfony's 404 page is not displayed)
+    #location /bundles {
+    #    try_files $uri =404;
+    #}
+
+    index index.php;
+    autoindex off;
+    charset off;
+
+    add_header 'X-Content-Type-Options' 'nosniff';
+    add_header 'X-XSS-Protection' '1; mode=block';
+
+
+    location ~ ^/index\.php(/|$) {
+        try_files $uri =404;
+        fastcgi_pass   fastcgi_backend;
+
+        fastcgi_param  PHP_FLAG  "session.auto_start=off \n suhosin.session.cryptua=off";
+        fastcgi_param  PHP_VALUE "max_execution_time=600";
+        fastcgi_read_timeout 600s;
+        fastcgi_connect_timeout 600s;
+
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        fastcgi_param  DOCUMENT_ROOT $realpath_root;
+        include    fastcgi_params;
+
+        internal;
+    }
+
+    # return 404 for all other php files not matching the front controller
+    # this prevents access to other php files you don't want to be accessible.
+    location ~ \.php$ {
+        return 404;
+    }
+
+    error_log /var/log/nginx/project_error.log;
+    access_log /var/log/nginx/project_access.log;
+}

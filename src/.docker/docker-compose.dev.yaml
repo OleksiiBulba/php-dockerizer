@@ -7,16 +7,18 @@ networks:
 services:
   nginx:
     env_file:
-      - ./.env.dev
-      - ./.env.dev.local
+      - ../.env.dev
+      - ../.env.dev.local
 
   php:
     ports:
       - "2222:22"   # ssh connection with container
       - "9003:9003" # xdebug default port
+    #volumes:
+    #  - ./.docker/build/php/xdebug.ini:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
     env_file:
-      - ./.env.dev
-      - ./.env.dev.local
+      - ../.env.dev
+      - ../.env.dev.local
     environment:
       - XDEBUG_ENABLED=1
       - XDEBUG_CONFIG=PHPSTORM
@@ -24,5 +26,5 @@ services:
 
   db:
     env_file:
-      - ./.env.dev
-      - ./.env.dev.local
+      - ../.env.dev
+      - ../.env.dev.local
