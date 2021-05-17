@@ -38,7 +38,7 @@ services:
     ports:
       - "9000:9000"
     volumes:
-      - ../:/app:rw
+      - ../:/var/www/html:rw
       - ./.docker/build/php/php.ini:/etc/php/8.0/fpm/conf.d/custom.ini
       - ~/.composer:/var/www/.composer:rw
       - ~/.npm:/var/www/.npm:rw
