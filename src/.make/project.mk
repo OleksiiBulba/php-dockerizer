@@ -13,8 +13,11 @@ help::
 	@printf "$(GREEN)   	logs		$(NC)	Show containers logs\n"
 	@printf "$(GREEN)   	bash		$(NC)	Show containers logs\n"
 
-.env .env.local .env.${APP_ENV} .env.${APP_ENV}.local:
-	cp ./.docker/.env.dist $@
+.env:
+	cp ./.docker/.env.dist .env
+
+.env.${APP_ENV:-dev} .env.${APP_ENV:-dev}.local .env.local:
+	touch $@
 
 .PHONY: init
 init: .env .env.local .env.${APP_ENV} .env.${APP_ENV}.local
@@ -23,6 +26,13 @@ init: .env .env.local .env.${APP_ENV} .env.${APP_ENV}.local
 run: init src composer.json composer.lock vendor .docker/docker-compose.base.yaml .docker/docker-compose.${APP_ENV}.yaml
 	$(DOCKER_COMPOSE) up -d
 	@touch .dc-running
+
+.PHONY: build
+build:
+	$(DOCKER_COMPOSE) build
+
+.PHONY: rebuild
+rebuild: stop build run
 
 .PHONY: ps
 ps: init
@@ -34,7 +44,7 @@ stop:
 	@rm .dc-running
 
 .PHONY: restart
-restart: .dc-running stop run
+restart: stop run
 
 .PHONY: logs
 logs: .dc-running
