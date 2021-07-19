@@ -20,6 +20,10 @@ Makefile
 
 To use dockerizer you need to install [make](https://www.gnu.org/software/make/) and [docker-compose](https://docs.docker.com/compose/install/).
 
+Before installation, you should have already in your project:
+* _vendor_, _public_ and _src_ folders (for php packages, index.php file and source files respectfully) -- it is required because dockerizer mounts these folders into containers;
+* _composer.json_ and _composer.lock_ files (it ensures the project has been set up correctly);
+
 ### Installation
 
 To install php-dockerizer into your project simply run command:
@@ -37,6 +41,11 @@ You can change `origin/master` to appropriate branch you want to use and `docker
 ## Contributing
 
 Please feel free to open pull request or create an issue, they are more than welcome!
+
+### Running tests
+
+If you cloned the repo, you can run command `./tests/run-test-install.sh` to test installation process.
+Command `./tests/clean-test-install.sh` will uninstall dockerizer files from _tests/install_ folder.
 
 ## License
 

@@ -11,8 +11,8 @@ CURRENT_DIR=$(pwd)
 cd $INSTALL_ROOT; mkdir $INSTALL_DIR; cd ./$INSTALL_DIR
 
 git init -qqq
-git remote add origin $REPO
-git fetch origin -qqq
+git remote add origin-install $REPO
+git fetch origin-install -qqq
 git checkout $VERSION -- src
 # TODO: add bin folder so it will be possible to use shell scripts during installation
 
