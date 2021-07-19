@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `rebuild` command that stops containers, run `build` command and starts containers again;
 - Added `run-test-install.sh` shell script, so everyone can run installation tests locally;
 - Added some files inside _tests/install_ folder for testing purposes;
+- Added docs/COMMANDS.md file with all available commands inside;
 
 ### Changed
 - Changed `ENV` variable to `APP_ENV` so it is the same as env variable in Symfony;

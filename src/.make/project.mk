@@ -5,13 +5,15 @@ DOCKER_COMPOSE := docker-compose -f ./.docker/docker-compose.base.yaml -f ./.doc
 .PHONY: help
 help::
 	@printf "$(BROWN) Project commands:$(NC)\n"
-	@printf "$(GREEN)   	help		$(NC)	Display this help message\n"
-	@printf "$(GREEN)   	run		$(NC)	Run docker containers\n"
-	@printf "$(GREEN)   	ps		$(NC)	Show running containers\n"
-	@printf "$(GREEN)   	stop		$(NC)	Stops all containers\n"
-	@printf "$(GREEN)   	restart		$(NC)	Stops and runs again all containers\n"
-	@printf "$(GREEN)   	logs		$(NC)	Show containers logs\n"
-	@printf "$(GREEN)   	bash		$(NC)	Show containers logs\n"
+	@printf "$(GREEN)	help	$(NC)	Display this help message\n"
+	@printf "$(GREEN)	run	$(NC)	Run docker containers\n"
+	@printf "$(GREEN)	ps	$(NC)	Show running containers\n"
+	@printf "$(GREEN)	stop	$(NC)	Stops all containers\n"
+	@printf "$(GREEN)	restart	$(NC)	Stops and runs again all containers\n"
+	@printf "$(GREEN)	build	$(NC)	Rebuild php container if there is any changes\n"
+	@printf "$(GREEN)	rebuild	$(NC)	Stops containers (if running),\n\t\t\t  rebuilds php container (see build command)\n\t\t\t  and starts containers back\n"
+	@printf "$(GREEN)	logs	$(NC)	Show containers logs\n"
+	@printf "$(GREEN)	bash	$(NC)	Show containers logs\n"
 
 .env:
 	cp ./.docker/.env.dist .env
