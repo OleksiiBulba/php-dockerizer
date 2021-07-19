@@ -12,17 +12,17 @@ services:
   nginx:
     image: nginx:1.19.6-alpine
     container_name: ${PROJECT_NAME:-project}_nginx
+    restart: on-failure
     ports:
       - "80:80"
     volumes:
-      - ../:/app:ro
-      - /app/vendor
+      - ../public:/var/www/html:ro
       - ./build/nginx/templates:/etc/nginx/templates
       - ../var/log/nginx:/var/log/nginx/
     environment:
-      - SITE_ROOT=/app/public
+      - SITE_ROOT=/var/www/html/public
       - NGINX_PORT=80
-      - NGINX_HOST=website.local
+      - NGINX_HOST=localhost
     env_file:
       - ../.env
       - ../.env.local
@@ -35,19 +35,23 @@ services:
     build:
       context: ./build/php/
     container_name: ${PROJECT_NAME:-project}_php
+    restart: on-failure
     ports:
       - "9000:9000"
+      - "2222:22" # ssh connection with container
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - ../:/var/www/html:rw
-      - ./.docker/build/php/php.ini:/etc/php/8.0/fpm/conf.d/custom.ini
       - ~/.composer:/var/www/.composer:rw
       - ~/.npm:/var/www/.npm:rw
+    user: "1000:1000"
     env_file:
       - ../.env
       - ../.env.local
     environment:
       - PHP_MEMORY_LIMIT=2048mb
-      - XDEBUG_ENABLED=0
+      - XDEBUG_MODE=off
     depends_on:
       - db
     links:
@@ -58,6 +62,7 @@ services:
   db:
     image: mysql:5.7
     container_name: ${PROJECT_NAME:-project}_db
+    restart: on-failure
     ports:
       - 3300:3306
     env_file:

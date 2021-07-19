@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 ### Planned
 - Add bin directory to checkout during installation, so it will be possible to use shell scripts.
+- Add github actions for installation tests;
+
+### Added
+- Added more configs *.ini and php-fpm;
+  - php writes logs to _/var/www/html/var/log/$pool.access.log_ and _/var/www/html/var/log/$pool.error.log_
+  - xdebug writes logs to _/var/www/html/var/xdebug_
+- Added Dockerfile for php container;
+- Added entrypoint script, .bashrc;
+- Added `build` command that forces rebuilding containers in case Dockerfile for php container changed;
+- Added `rebuild` command that stops containers, run `build` command and starts containers again;
+- Added `run-test-install.sh` shell script, so everyone can run installation tests locally;
+- Added some files inside _tests/install_ folder for testing purposes;
+- Added docs/COMMANDS.md file with all available commands inside;
+
+### Changed
+- Changed `ENV` variable to `APP_ENV` so it is the same as env variable in Symfony;
+- _docker-compose.*_ files moved to _.docker_ folder;
+- Created nginx conf template instead different conf files;
+- _.env.dist_ file moved to _.docker_ folder;
+- If _.env_ does not exist, it is created from _.docker/.env.dist_ file;
+- If _.env.local_, _.env.{APP_ENV}_, and _.env.{APP_ENV}.local_ do not exist, they are created as an empty files;
+- `restart` command does not require running project anymore, if project is not running, it just starts it.
+- `onlinesetup` script uses remote repository name `origin-install`;
+
+### Fixed
+- Fixed project paths inside docker-compose containers;
 
 ## [0.1.0] - 2021-01-31
 
