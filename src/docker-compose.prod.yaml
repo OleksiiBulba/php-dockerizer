@@ -9,8 +9,8 @@ services:
     ports:
       - "443:443"
     volumes:
-      - ./.docker/nginx/ssl/nginx-selfsigned.key:/etc/nginx/ssl/nginx-selfsigned.key
-      - ./.docker/nginx/ssl/nginx-selfsigned.crt:/etc/nginx/ssl/nginx-selfsigned.crt
+      - ./nginx/ssl/nginx-selfsigned.key:/etc/nginx/ssl/nginx-selfsigned.key
+      - ./nginx/ssl/nginx-selfsigned.crt:/etc/nginx/ssl/nginx-selfsigned.crt
     env_file:
       - ../.env.prod
       - ../.env.prod.local
