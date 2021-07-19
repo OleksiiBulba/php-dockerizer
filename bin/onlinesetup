@@ -1,24 +1,36 @@
 #!/bin/bash
 
+function git_init() {
+    # $1 -- repository
+    # $2 -- branch to checkout
+    git init -qqq
+    git remote add origin-install "$1"
+    git fetch origin-install -qqq
+    git checkout origin-install/"$2" -- src
+    # TODO: add bin folder so it will be possible to use shell scripts during installation
+
+    PREV_DOTGLOB=$(shopt -p | grep dotglob)
+    shopt -s dotglob
+    mv ./src/* ./
+    $PREV_DOTGLOB
+    rm -rf ./src
+}
+
+function makefile_init() {
+    MakeFile=${1:-$(pwd)/Makefile}
+    touch -c "$MakeFile"
+    if ! grep -qF 'include ./.dockerizer/dockerizer.mk' "$MakeFile"; then
+        echo -e "include ./.dockerizer/dockerizer.mk\n\n$(cat "$MakeFile")" > "$MakeFile"
+    fi
+}
+
 REPO=${1:-https://github.com/OleksiiBulba/php-dockerizer}
 VERSION=${2:-origin/master}
-INSTALL_ROOT=${3:-./}
-INSTALL_DIR=${4:-dockerizer}
-
+INSTALL_ROOT=${3:-.}
 INSTALL_ROOT=$(realpath "$INSTALL_ROOT")
-
+INSTALL_DIR=$INSTALL_ROOT/.dockerizer
 CURRENT_DIR=$(pwd)
-cd "$INSTALL_ROOT" || exit; mkdir "$INSTALL_DIR"; cd ./"$INSTALL_DIR" || exit
-
-git init -qqq
-git remote add origin-install "$REPO"
-git fetch origin-install -qqq
-git checkout "$VERSION" -- src
-# TODO: add bin folder so it will be possible to use shell scripts during installation
-
-PREV_DOTGLOB=$(shopt -p | grep dotglob)
-shopt -s dotglob
-mv ./src/* ../
-$PREV_DOTGLOB
-cd ../; rm -rf ./"$INSTALL_DIR"
+rm -rf "$INSTALL_DIR"; mkdir -p "$INSTALL_DIR"; cd "$INSTALL_DIR" || exit
+git_init "$REPO" "$VERSION"
 cd "$CURRENT_DIR" || exit
+makefile_init "$INSTALL_ROOT"/Makefile

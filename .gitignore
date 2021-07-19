@@ -1,4 +1,3 @@
-/.idea
 /src/.env*
 !/src/.env.dist
 /src/.dc-running

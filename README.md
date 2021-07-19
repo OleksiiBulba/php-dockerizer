@@ -2,19 +2,17 @@
 
 This project is intended to help php developers to dockerize their projects. The difference of this project from 
 others similar is simplicity: you run single bash command and get power of make commands with set of docker-compose
-files for different purposes. After installing php-dockerizer into your project, you can commit only files you want
+files for different purposes. After installing php-dockerizer into your project, you can configure and commit only files you want
 to keep.
 
 ## Usage
 
-Usage of the dockerizer is pretty simple: you run online install command, it fetches changes from a source repository to your project, and you can commit files you want to keep.
-Keep in mind that dockerizer will copy these files and directories to the root of your project:
+Usage of the dockerizer is pretty simple: you run online install command, it fetches source code from a repository to your project, and you can commit files you want to keep.
+Dockerizer will keep all own files in .dockerizer folder, also it will add include directive:
 ```text
-Makefile
-.docker
-.make
+include ./.dockerizer/dockerizer.mk
 ```
-* In future dockerizer will be able to detect if there is any file conflicts with your existing files. 
+into your Makefile, if it does not exist, it will be created. 
 
 ### Requirements
 
@@ -26,17 +24,21 @@ Before installation, you should have already in your project:
 
 ### Installation
 
-To install php-dockerizer into your project simply run command:
+To install php-dockerizer into your project simply run command from its root:
 ```shell
-curl -s https://raw.githubusercontent.com/OleksiiBulba/php-dockerizer/master/bin/onlinesetup | bash -s -- https://github.com/OleksiiBulba/php-dockerizer origin/master dockerizer
+curl -s https://raw.githubusercontent.com/OleksiiBulba/php-dockerizer/master/bin/onlinesetup | bash -s -- https://github.com/OleksiiBulba/php-dockerizer master
+```
+The structure of the command above:
+```shell
+curl -s <onlinesetup-source-file> | bash -s -- <repository> <branch> <relative-or-absolute-path-to-project-root>
+```
+It allows you clone dockerizer repository, make changes and install it from your repository:
+```shell
+curl -s https://raw.githubusercontent.com/{you-github-username}/php-dockerizer/master/bin/onelinesetup | bash -s -- https://github.com/{you-github-username}/php-dockerizer master
 ```
 
-If you cloned repository to your github account, you can install php-dockerizer by a command:
-```shell
-curl -s https://raw.githubusercontent.com/{you-github-username}/php-dockerizer/master/bin/onelinesetup | bash -s -- https://github.com/{you-github-username}/php-dockerizer origin/master dockerizer
-```
-
-You can change `origin/master` to appropriate branch you want to use and `dockerizer` to any directory name that does not exist in your repo; do not worry, the directory will be removed after installation.
+You can change `master` to appropriate branch you want to use and `dockerizer` to any directory name that does not exist in your repo; do not worry, the directory will be removed after installation.
+Keep in mind that you do not need to specify origin name before branch name!
 
 ## Contributing
 

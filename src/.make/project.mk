@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-DOCKER_COMPOSE := docker-compose -f ./.docker/docker-compose.base.yaml -f ./.docker/docker-compose.${APP_ENV}.yaml
+DOCKER_COMPOSE := docker-compose -f ./.dockerizer/docker-compose.base.yaml -f ./.dockerizer/docker-compose.${APP_ENV}.yaml
 
 .PHONY: help
 help::
@@ -16,16 +16,16 @@ help::
 	@printf "$(GREEN)	bash	$(NC)	Show containers logs\n"
 
 .env:
-	cp ./.docker/.env.dist .env
+	cp ./.dockerizer/.env.dist .env
 
-.env.${APP_ENV:-dev} .env.${APP_ENV:-dev}.local .env.local:
+.env.${APP_ENV} .env.${APP_ENV}.local .env.local:
 	touch $@
 
 .PHONY: init
-init: .env .env.local .env.${APP_ENV} .env.${APP_ENV}.local
+init: .env .env.local .env.${APP_ENV} .env.${APP_ENV}.local .env.local
 
 .PHONY: run
-run: init src composer.json composer.lock vendor .docker/docker-compose.base.yaml .docker/docker-compose.${APP_ENV}.yaml
+run: init composer.json composer.lock vendor .dockerizer/docker-compose.base.yaml .dockerizer/docker-compose.${APP_ENV}.yaml
 	$(DOCKER_COMPOSE) up -d
 	@touch .dc-running
 

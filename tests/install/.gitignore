@@ -1,8 +1,1 @@
 *
-!.gitignore
-!composer.json
-!composer.lock
-!public/index.php
-!src
-!var/log
-!vendor/autoload.php

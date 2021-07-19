@@ -6,8 +6,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Planned
-- Add bin directory to checkout during installation, so it will be possible to use shell scripts.
-- Add github actions for installation tests;
+- Add bin directory to check out during installation, so it will be possible to use shell scripts.
+- Add GitHub actions for installation tests;
+
+### Changed
+- Changed project file structure:
+- Install script installs project into .dockerizer folder, all files are kept inside it;
+- Only Makefile is changed (or created) outside that to include dockerizer commands;
+- Updated nodejs and nvm versions;
+- Small changes to Dockerfile: renamed xdebug php extension ini file;
+- Changed site root env variable for Nginx in docker-compose.base.yaml file;
+- Only .env and .env.local files are created; User should create .env.{ENV} and .env.{ENV}.local files by himself;
+- Nginx paths reconfigured;
+- Removed port 9003 from docker-compose.dev.yaml;
+- Install test refactored;
+- Bumped php, nginx and mysql versions;
+  Misc:
+- Turned on nginx directive `merge_slashes`;
 
 ### Fixed
 - Small code adjustment;
