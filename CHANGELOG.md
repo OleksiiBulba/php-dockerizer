@@ -10,7 +10,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add github actions for installation tests;
 
 ### Added
-- Added more configs for php.ini and php-fpm;
+- Added more configs *.ini and php-fpm;
+  - php writes logs to _/var/www/html/var/log/$pool.access.log_ and _/var/www/html/var/log/$pool.error.log_
+  - xdebug writes logs to _/var/www/html/var/xdebug_
 - Added Dockerfile for php container;
 - Added entrypoint script, .bashrc;
 - Added `build` command that forces rebuilding containers in case Dockerfile for php container changed;
