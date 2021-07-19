@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add bin directory to checkout during installation, so it will be possible to use shell scripts.
 - Add github actions for installation tests;
 
+## [0.2.0] - 2021-07-19
+
 ### Added
 - Added more configs *.ini and php-fpm;
   - php writes logs to _/var/www/html/var/log/$pool.access.log_ and _/var/www/html/var/log/$pool.error.log_
@@ -20,6 +22,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added `run-test-install.sh` shell script, so everyone can run installation tests locally;
 - Added some files inside _tests/install_ folder for testing purposes;
 - Added docs/COMMANDS.md file with all available commands inside;
+- Added crontab;
 
 ### Changed
 - Changed `ENV` variable to `APP_ENV` so it is the same as env variable in Symfony;
