@@ -8,7 +8,7 @@ INSTALL_DIR=${4:-dockerizer}
 INSTALL_ROOT=$(realpath "$INSTALL_ROOT")
 
 CURRENT_DIR=$(pwd)
-cd "$INSTALL_ROOT" || exit; mkdir "$INSTALL_DIR"; cd ./"$INSTALL_DIR" || exit
+cd "$INSTALL_ROOT" || exit 1; mkdir "$INSTALL_DIR" || exit 1; cd ./"$INSTALL_DIR" || exit 1
 
 git init -qqq
 git remote add origin-install "$REPO"
