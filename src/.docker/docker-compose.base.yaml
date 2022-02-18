@@ -64,7 +64,7 @@ services:
     container_name: ${PROJECT_NAME:-project}_db
     restart: on-failure
     ports:
-      - 3300:3306
+      - "3300:3306"
     env_file:
       - ../.env
       - ../.env.local

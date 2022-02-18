@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add bin directory to checkout during installation, so it will be possible to use shell scripts.
 - Add github actions for installation tests;
 
+### Fixed
+- Small code adjustment;
+
 ## [0.2.0] - 2021-07-19
 
 ### Added
