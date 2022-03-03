@@ -24,6 +24,7 @@ Before installation, you should have already in your project:
 
 ### Installation
 
+#### Installation to existing project
 To install php-dockerizer into your project simply run command from its root:
 ```shell
 curl -s https://raw.githubusercontent.com/OleksiiBulba/php-dockerizer/master/bin/onlinesetup | bash -s -- https://github.com/OleksiiBulba/php-dockerizer master
@@ -39,6 +40,10 @@ curl -s https://raw.githubusercontent.com/{you-github-username}/php-dockerizer/m
 
 You can change `master` to appropriate branch you want to use and `dockerizer` to any directory name that does not exist in your repo; do not worry, the directory will be removed after installation.
 Keep in mind that you do not need to specify origin name before branch name!
+
+#### Clean project creation
+
+
 
 ## Contributing
 

@@ -1,0 +1,26 @@
+#!/bin/bash
+
+GREEN='\033[0;32m'
+RED='\033[1;31m'
+NC='\033[0m' # No Color
+
+[ "$(ls -A .)" ] && echo -e "${RED}Cannot install project to non empty folder.${NC}" && exit 1
+
+PROJECT_TYPE=${1:-symfony/skeleton}
+branch=${2:-master}
+if [ "$PROJECT_TYPE" != 'symfony/skeleton' ] && [ "$PROJECT_TYPE" != 'symfony/website-skeleton' ]; then
+    echo -e "${RED}Project '$PROJECT_TYPE' is not supported yet.${NC}"
+    exit 1;
+fi
+echo -e "${GREEN}Project ${PROJECT_TYPE} will be installed.${NC}"
+
+docker pull composer:latest
+CURRENT_DIR=$(pwd)
+docker run \
+    -v "$CURRENT_DIR":/app \
+    -it --rm --user 1000:1000 \
+    composer create-project "$PROJECT_TYPE" .
+printf 'Installing dockerizer... '
+curl -s https://raw.githubusercontent.com/OleksiiBulba/php-dockerizer/"$branch"/bin/onlinesetup | bash -s -- https://github.com/OleksiiBulba/php-dockerizer "$branch" .
+
+echo -e "${GREEN}Done${NC}"

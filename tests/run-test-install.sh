@@ -28,7 +28,7 @@ current_branch=$(git branch --show-current)
 branch=${1:-$current_branch}
 echo -e "Branch ${YELLOW}$branch${NC} will be used for test"
 # Ensure run-test-install.sh is run from project root path
-[[ ! -d $DIR/install ]] && echo "Cannot find install folder in $DIR" && exit 1
+[[ ! -d $DIR/install ]] && echo "Cannot find 'install' folder in $DIR" && exit 1
 "$DIR"/clean-test-install.sh
 printf 'Copying test files... '; cp -r "$DIR"/files/* "$DIR"/install; [[ $? -eq 0 ]] && echo -e "${GREEN}Done${NC}" || exit 1
 printf 'Installing dockerizer... '; curl -s https://raw.githubusercontent.com/OleksiiBulba/php-dockerizer/"$branch"/bin/onlinesetup | bash -s -- https://github.com/OleksiiBulba/php-dockerizer "$branch" "$DIR"/install; echo -e "${GREEN}Done${NC}"
