@@ -13,7 +13,6 @@ services:
   php:
     ports:
       - "2222:22"   # ssh connection with container
-      - "9003:9003" # xdebug default port
     env_file:
       - ../.env.dev
       - ../.env.dev.local

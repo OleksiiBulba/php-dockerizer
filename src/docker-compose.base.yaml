@@ -10,13 +10,14 @@ volumes:
 
 services:
   nginx:
-    image: nginx:1.19.6-alpine
+    image: nginx:1.21.6-alpine
     container_name: ${PROJECT_NAME:-project}_nginx
     restart: on-failure
+    user: "1000:1000"
     ports:
       - "80:80"
     volumes:
-      - ../public:/var/www/html:ro
+      - ../:/var/www/html:ro
       - ./build/nginx/templates:/etc/nginx/templates
       - ../var/log/nginx:/var/log/nginx/
     environment:
@@ -36,6 +37,7 @@ services:
       context: ./build/php/
     container_name: ${PROJECT_NAME:-project}_php
     restart: on-failure
+    user: "1000:1000"
     ports:
       - "9000:9000"
       - "2222:22" # ssh connection with container
@@ -45,7 +47,6 @@ services:
       - ../:/var/www/html:rw
       - ~/.composer:/var/www/.composer:rw
       - ~/.npm:/var/www/.npm:rw
-    user: "1000:1000"
     env_file:
       - ../.env
       - ../.env.local
@@ -60,9 +61,10 @@ services:
       - project-network
 
   db:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: ${PROJECT_NAME:-project}_db
     restart: on-failure
+    user: "1000:1000"
     ports:
       - "3300:3306"
     env_file:

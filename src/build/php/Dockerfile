@@ -1,4 +1,4 @@
-ARG PHP_VERSION=8.0.6
+ARG PHP_VERSION=8.1.3
 FROM php:${PHP_VERSION}-fpm
 
 ENV INSTALL_DIR /var/www/html
@@ -42,7 +42,7 @@ RUN requirements="libcurl3-dev libfreetype6 libjpeg62-turbo libjpeg62-turbo-dev 
 
 # Install XDebug
 RUN yes | pecl install xdebug && \
-	echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/xdebug.ini
+	echo "zend_extension=$(find /usr/local/lib/php/extensions/ -name xdebug.so)" > /usr/local/etc/php/conf.d/php-ext-xdebug.ini
 
 RUN docker-php-ext-configure \
   	   gd --with-freetype=/usr/include/ \
@@ -81,9 +81,9 @@ RUN apt-get update \
   	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
 
 # Install Node, NVM, NPM and Grunt
-RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - \
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
   	&& apt-get install -y nodejs build-essential \
-    && curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.0/install.sh | sh \
+    && curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | sh \
     && npm i -g grunt-cli yarn requirejs
 
 # Install Composer
