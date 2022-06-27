@@ -7,5 +7,5 @@
 /src/public/
 /src/src/
 /src/vendor/
-/tests/install/*
-!/tests/install/.gitkeep
+/tests/install*/*
+!/tests/install*/.gitkeep

@@ -13,7 +13,6 @@ services:
     image: nginx:1.21.6-alpine
     container_name: ${PROJECT_NAME:-project}_nginx
     restart: on-failure
-    user: "1000:1000"
     ports:
       - "80:80"
     volumes:
@@ -52,7 +51,6 @@ services:
       - ../.env.local
     environment:
       - PHP_MEMORY_LIMIT=2048mb
-      - XDEBUG_MODE=off
     depends_on:
       - db
     links:
@@ -64,7 +62,6 @@ services:
     image: mysql:8.0
     container_name: ${PROJECT_NAME:-project}_db
     restart: on-failure
-    user: "1000:1000"
     ports:
       - "3300:3306"
     env_file:

@@ -17,6 +17,7 @@ services:
       - ../.env.dev
       - ../.env.dev.local
     environment:
+      - DEBUG_EXTENSION=xdebug
       - XDEBUG_MODE=develop,debug
       - XDEBUG_CONFIG=PHPSTORM
       - PHP_IDE_CONFIG=serverName=nginx

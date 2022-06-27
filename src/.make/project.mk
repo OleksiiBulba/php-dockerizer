@@ -14,6 +14,7 @@ help::
 	@printf "$(GREEN)	rebuild	$(NC)	Stops containers (if running),\n\t\t\t  rebuilds php container (see build command)\n\t\t\t  and starts containers back\n"
 	@printf "$(GREEN)	logs	$(NC)	Show containers logs\n"
 	@printf "$(GREEN)	bash	$(NC)	Show containers logs\n"
+	@printf "$(GREEN)	add-symfony $(NC)	Add bin/console to .bashrc file with alias 'symfony'"
 
 .env:
 	cp ./.dockerizer/.env.dist .env
@@ -55,3 +56,7 @@ logs: .dc-running
 .PHONY: bash
 bash: .dc-running
 	$(DOCKER_COMPOSE) exec php bash
+
+.PHONY: add-symfony
+add-symfony:
+	$(DOCKER_COMPOSE) exec php bash -c "echo \"alias symfony='php -f \\\"\\\$$HOME\\\"/html/bin/console'\" >> \$$HOME/.bashrc"
