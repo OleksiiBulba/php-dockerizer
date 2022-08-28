@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Small code adjustment;
+- Fixed issue-10 when installing dockerizer
 
 ## [0.2.0] - 2021-07-19
 

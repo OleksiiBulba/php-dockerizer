@@ -18,7 +18,7 @@ function git_init() {
 
 function makefile_init() {
     MakeFile=${1:-$(pwd)/Makefile}
-    touch -c "$MakeFile"
+    touch "$MakeFile"
     if ! grep -qF 'include ./.dockerizer/dockerizer.mk' "$MakeFile"; then
         echo -e "include ./.dockerizer/dockerizer.mk\n\n$(cat "$MakeFile")" > "$MakeFile"
     fi
