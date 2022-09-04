@@ -7,14 +7,14 @@ ENV SSH_PASSWORD root
 
 # sodium
 # php ^7.2
-RUN apt-get update && apt-cache search libsodium && apt-get install -y libsodium-dev # libsodium18
+RUN apt-get update && apt-cache search libsodium && apt-get install --no-install-recommends -y libsodium-dev && rm -rf /var/lib/apt/lists/* # libsodium18
 
 # Install System Dependencies
 RUN requirements="libcurl3-dev libfreetype6 libjpeg62-turbo libjpeg62-turbo-dev libpng-dev libfreetype6-dev libicu-dev libxslt1-dev" \
     apt-get update \
 	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends software-properties-common \
 	&& apt-get update \
-	&& DEBIAN_FRONTEND=noninteractive apt-get install -y \
+	&& DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
 	libcurl3-dev libfreetype6 libjpeg62-turbo libjpeg62-turbo-dev libpng-dev libfreetype6-dev libicu-dev libxslt1-dev \
 	libicu-dev \
     libssl-dev \
@@ -38,7 +38,8 @@ RUN requirements="libcurl3-dev libfreetype6 libjpeg62-turbo libjpeg62-turbo-dev 
 	tar \
 	cron \
 	bash-completion \
-	&& apt-get clean
+	&& apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install XDebug
 RUN yes | pecl install xdebug && \
@@ -61,9 +62,10 @@ RUN docker-php-ext-configure \
 
 # Install OpenSSH server
 RUN apt-get update \
-    && apt-get install -y openssh-server \
-    sudo \
-    openssh-server
+    && apt-get install -y --no-install-recommends openssh-server \
+    # sudo \
+    openssh-server \
+    && rm -rf /var/lib/apt/lists/*
 RUN mkdir /var/run/sshd
 RUN echo "${SSH_USER}:${SSH_PASSWORD}" | chpasswd
 RUN echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
@@ -73,16 +75,17 @@ EXPOSE 22
 
 # Install oAuth
 RUN apt-get update \
-  	&& apt-get install -y \
+  	&& apt-get install -y --no-install-recommends \
   	libpcre3 \
   	libpcre3-dev \
   	# php-pear \
   	&& pecl install oauth \
-  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini
+  	&& echo "extension=oauth.so" > /usr/local/etc/php/conf.d/docker-php-ext-oauth.ini \
+    && rm -rf /var/lib/apt/lists/*
 
 # Install Node, NVM, NPM and Grunt
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
-  	&& apt-get install -y nodejs build-essential \
+  	&& apt-get install -y --no-install-recommends nodejs build-essential \
     && curl https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | sh \
     && npm i -g grunt-cli yarn requirejs
 
@@ -95,7 +98,7 @@ RUN echo "memory_limit=2048M" >> /usr/local/etc/php/conf.d/common.ini \
 	&& echo "max_input_time=1000" >> /usr/local/etc/php/conf.d/common.ini
 
 # Install Mhsendmail
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install golang-go \
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends golang-go \
    && mkdir /opt/go \
    && export GOPATH=/opt/go \
    && go get github.com/mailhog/mhsendmail
